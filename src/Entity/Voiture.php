@@ -28,6 +28,10 @@ class Voiture
     #[ORM\Column(length: 50)]
     private ?string $date_premiere_immatriculation = null;
 
+    #[ORM\ManyToOne(inversedBy: 'voitures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Marque $marque_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +93,18 @@ class Voiture
     public function setDatePremiereImmatriculation(string $date_premiere_immatriculation): static
     {
         $this->date_premiere_immatriculation = $date_premiere_immatriculation;
+
+        return $this;
+    }
+
+    public function getMarqueId(): ?Marque
+    {
+        return $this->marque_id;
+    }
+
+    public function setMarqueId(?Marque $marque_id): static
+    {
+        $this->marque_id = $marque_id;
 
         return $this;
     }
