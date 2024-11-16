@@ -32,6 +32,9 @@ class Voiture
     #[ORM\JoinColumn(nullable: false)]
     private ?Marque $marque_id = null;
 
+    #[ORM\ManyToOne]
+    private ?User $user_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class Voiture
     public function setMarqueId(?Marque $marque_id): static
     {
         $this->marque_id = $marque_id;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): static
+    {
+        $this->user_id = $user_id;
 
         return $this;
     }
