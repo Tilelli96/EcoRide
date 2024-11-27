@@ -1,0 +1,31 @@
+body {
+    background-color: #AEBA8A;
+}
+a {
+    color: white;
+}
+nav {
+    background-color: #80917D;
+}
+li {
+    padding-inline: 30px;
+}
+.navbartoggler {
+    border: 0em;
+}
+@media (max-width: 990px) {
+    .reverse {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        column-width: 58%;
+    }
+    .icone {
+        margin-top: 20px;
+        align-self: self-start;
+    }
+    .navbar-brand {
+        align-self: self-start;
+    }
+  }
+  
