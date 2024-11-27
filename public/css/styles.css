@@ -1,8 +1,15 @@
 body {
     background-color: #AEBA8A;
 }
+footer {
+    background-image: url('../media/img_feuille.jpg');
+    background-size: 100%;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+}
 a {
     color: white;
+    text-decoration: none;
 }
 nav {
     background-color: #80917D;
@@ -18,7 +25,7 @@ li {
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
-        column-width: 58%;
+        width: 60%;
     }
     .icone {
         margin-top: 20px;
