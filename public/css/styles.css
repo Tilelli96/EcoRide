@@ -20,7 +20,24 @@ li {
 .navbartoggler {
     border: 0em;
 }
+.btn {
+    background-color: #80917D;
+    border: #80917D solid;
+}
+.register {
+    background-color: rgb(128, 145, 125, 0.5);
+    margin-left: 250px;
+    margin-right: 250px;
+}
+.mot_de_passe {
+    padding-right: 59px;
+}
 @media (max-width: 990px) {
+    .register {
+        background-color: rgb(128, 145, 125, 0.5);
+        margin-left: 150px;
+        margin-right: 150px;
+    }
     .reverse {
         display: flex;
         flex-direction: row-reverse;

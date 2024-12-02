@@ -7,19 +7,23 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <div class="bg-danger text-center">
-        <h1>Authentification</h1>
+    <div class="register text-center mt-5">
+        <h1>Connexion</h1>
 
         {{ form_errors(registrationForm) }}
-
         {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, {
-                label: 'Password'
-            }) }}
+        <div class="m-3 text-light">
+            {{ form_row(registrationForm.email, {label:'Email'}) }}
+        </div>
+        <div class="mot_de_passe m-3 text-light">
+            {{ form_row(registrationForm.plainPassword, {label: 'Mot De Passe'}) }}
             {{ form_row(registrationForm.agreeTerms) }}
-
-            <button type="submit" class="btn">Register</button>
-        {{ form_end(registrationForm) }}
+        </div>
+        <div class="m-3 text-light">
+            <button type="submit" class="btn text-light">Connexion</button>
+        </div>
+            {{ form_end(registrationForm) }}
+        </div>
+         
     </div>
 {% endblock %}
