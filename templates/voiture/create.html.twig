@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voiture{% endblock %}
+
+{% block body %}
+<div class="register text-center p-2 m-5">
+   {{ form_errors(form) }}
+   {{ form_start(form) }}
+   <div class="d-flex justify-content-center">
+       <div>
+           <div class="m-3 text-light">
+               {{form_label(form.modele)}}
+               <br>
+               {{ form_widget(form.modele)}}
+           </div>
+           <div class="m-3 text-light">
+               {{form_label(form.immatriculation)}}
+               <br>
+               {{form_widget(form.immatriculation)}}
+           </div>
+           <div class="m-3 text-light">
+                {{form_label(form.date_premiere_immatriculation)}}
+                <br>
+                {{form_widget(form.date_premiere_immatriculation)}}
+            </div>
+       </div>
+       <div>
+            <div class="m-3 text-light">
+                {{form_label(form.energie)}}
+                <br>
+                {{form_widget(form.energie)}}
+            </div>
+            <div class="m-3 text-light">
+                {{form_label(form.couleur)}}
+                <br>
+                {{ form_widget(form.couleur)}}
+            </div>
+           <div class="m-3 text-light">
+               {{form_label(form.marque_id)}}
+               <br>
+               {{ form_widget(form.marque_id)}}
+           </div>
+       </div>
+   </div>
+   <div class="m-3 text-light">
+       <button type="submit" class="btn text-light">Enregistrer</button>
+   </div>
+   {{ form_end(form) }}
+</div>
+{% endblock %}

@@ -1,11 +1,14 @@
 body {
     background-color: #AEBA8A;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 footer {
     background-image: url('../media/img_feuille.jpg');
     background-size: 100%;
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
+    position: static;
+    bottom:0 ; right: 0 ; left: 0;
 }
 a {
     color: white;
@@ -26,18 +29,8 @@ li {
 }
 .register {
     background-color: rgb(128, 145, 125, 0.5);
-    margin-left: 250px;
-    margin-right: 250px;
-}
-.mot_de_passe {
-    padding-right: 59px;
 }
 @media (max-width: 990px) {
-    .register {
-        background-color: rgb(128, 145, 125, 0.5);
-        margin-left: 150px;
-        margin-right: 150px;
-    }
     .reverse {
         display: flex;
         flex-direction: row-reverse;
@@ -50,6 +43,10 @@ li {
     }
     .navbar-brand {
         align-self: self-start;
+    }
+    footer {
+        position: static;
+        bottom:0 ; right: 0 ; left: 0;
     }
   }
   
