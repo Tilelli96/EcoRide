@@ -19,15 +19,20 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends AbstractController
 {
     #[Route('/inscription', name: 'user.inscription')]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-                $user->setRoles(['ROLE_USER']);
+                $user->setRoles(['utilisateur']);
+                /** @var string $Password */
+                $Password = $form->get('password')->getData();
+                // encode the plain password
+                $user->setPassword($userPasswordHasher->hashPassword($user, $Password));
                 $em->persist($user);
                 $em->flush();
+                return $this->redirectToRoute('user.register');
         }
         return $this->render('user/index.html.twig', [
             'form' => $form,
