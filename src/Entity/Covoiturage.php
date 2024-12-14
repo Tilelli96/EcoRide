@@ -18,7 +18,7 @@ class Covoiturage
     private ?\DateTimeInterface $date_depart = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $heure_depart = null;
+    private ?string $heure_depart = null;
 
     #[ORM\Column(length: 50)]
     private ?string $lieu_depart = null;
@@ -64,12 +64,12 @@ class Covoiturage
         return $this;
     }
 
-    public function getHeureDepart(): ?\DateTimeInterface
+    public function getHeureDepart(): ?string
     {
         return $this->heure_depart;
     }
 
-    public function setHeureDepart(\DateTimeInterface $heure_depart): static
+    public function setHeureDepart(string $heure_depart): static
     {
         $this->heure_depart = $heure_depart;
 
