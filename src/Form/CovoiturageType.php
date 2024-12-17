@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 class CovoiturageType extends AbstractType
 {
@@ -17,6 +18,7 @@ class CovoiturageType extends AbstractType
         $builder
             ->add('date_depart', null, [
                 'widget' => 'single_text',
+                
             ])
             ->add('heure_depart')
             ->add('lieu_depart')
@@ -26,7 +28,8 @@ class CovoiturageType extends AbstractType
             ->add('heure_arrivee')
             ->add('lieu_arrivee')
             ->add('nb_place')
-            ->add('prix_personne')
+            ->add('prix_personne', MoneyType::class,[
+            ])
             ->add('voiture_id', EntityType::class, [
                 'class' => Voiture::class,
                 'choice_label' => 'modele',

@@ -14,20 +14,20 @@ class Covoiturage
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_depart = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?string $heure_depart = null;
+    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
+    private ?\DateTimeInterface $heure_depart = null;
 
     #[ORM\Column(length: 50)]
     private ?string $lieu_depart = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_arrivee = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $heure_arrivee = null;
+    #[ORM\Column(type: Types::TIME_IMMUTABLE)]
+    private ?\DateTimeInterface $heure_arrivee = null;
 
     #[ORM\Column(length: 50)]
     private ?string $lieu_arrivee = null;
@@ -39,7 +39,7 @@ class Covoiturage
     private ?int $nb_place = null;
 
     #[ORM\Column]
-    private ?float $prix_personne = null;
+    private ?\MoneyType $prix_personne = null;
 
     #[ORM\ManyToOne]
     private ?Voiture $voiture_id = null;
