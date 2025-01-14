@@ -64,12 +64,12 @@ class Covoiturage
         return $this;
     }
 
-    public function getHeureDepart(): ?string
+    public function getHeureDepart(): ?\DateTimeInterface
     {
         return $this->heure_depart;
     }
 
-    public function setHeureDepart(string $heure_depart): static
+    public function setHeureDepart(\DateTimeInterface $heure_depart): static
     {
         $this->heure_depart = $heure_depart;
 
@@ -100,12 +100,12 @@ class Covoiturage
         return $this;
     }
 
-    public function getHeureArrivee(): ?string
+    public function getHeureArrivee(): ?\DateTimeInterface
     {
         return $this->heure_arrivee;
     }
 
-    public function setHeureArrivee(string $heure_arrivee): static
+    public function setHeureArrivee(\DateTimeInterface $heure_arrivee): static
     {
         $this->heure_arrivee = $heure_arrivee;
 
@@ -148,12 +148,12 @@ class Covoiturage
         return $this;
     }
 
-    public function getPrixPersonne(): ?float
+    public function getPrixPersonne(): ?\MoneyType
     {
         return $this->prix_personne;
     }
 
-    public function setPrixPersonne(float $prix_personne): static
+    public function setPrixPersonne(\MoneyType $prix_personne): static
     {
         $this->prix_personne = $prix_personne;
 

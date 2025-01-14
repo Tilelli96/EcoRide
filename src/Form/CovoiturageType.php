@@ -28,8 +28,7 @@ class CovoiturageType extends AbstractType
             ->add('heure_arrivee')
             ->add('lieu_arrivee')
             ->add('nb_place')
-            ->add('prix_personne', MoneyType::class,[
-            ])
+            ->add('prix_personne', MoneyType::class)
             ->add('voiture_id', EntityType::class, [
                 'class' => Voiture::class,
                 'choice_label' => 'modele',

@@ -16,11 +16,6 @@ class AvisType extends AbstractType
         $builder
             ->add('commentaire')
             ->add('note')
-            ->add('statut')
-            ->add('user_id', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
         ;
     }
 

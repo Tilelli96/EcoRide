@@ -12,20 +12,20 @@ use App\Entity\User;
 use App\Entity\A;
 use App\Form\AvisType;
 
+#[Route('/avis')]
 class AvisController extends AbstractController
 {
-    #[Route('/avis.create', name: 'app_avis')]
-    public function create(Request $Request, EntityManagerInterface $em ): Response
+    #[Route('/{id}/create', name: 'app_avis')]
+    public function create(Request $Request, EntityManagerInterface $em, User $user ): Response
     {
         $avis = new A();
         $form = $this->createForm(AvisType::class, $avis);
         $form->handleRequest($Request);
-        $user = $this->getCovoiturage()->getUserId();
         if($form->isSubmitted() && $form->isValid()){
             $avis->setStatut('à confirmer');
             $avis->setUserId($user);
             $em->persist();
-            $en->flush($avis);
+            $em->flush($avis);
             $this->redirectToRoute('page_accueil');
         }
         
