@@ -13,7 +13,7 @@ use App\Entity\A;
 use App\Form\AvisType;
 
 #[Route('/avis')]
-class AvisController extends AbstractController
+final class AvisController extends AbstractController
 {
     #[Route('/{id}/create', name: 'app_avis')]
     public function create(Request $Request, EntityManagerInterface $em, User $user ): Response
@@ -24,12 +24,12 @@ class AvisController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $avis->setStatut('à confirmer');
             $avis->setUserId($user);
-            $em->persist();
+            $em->persist($avis);
             $em->flush($avis);
             $this->redirectToRoute('page_accueil');
         }
         
-        return $this->render('avis/index.html.twig', [
+        return $this->render('avis/create.html.twig', [
             'form' => $form,
         ]);
     }

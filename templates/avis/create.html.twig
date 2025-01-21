@@ -9,18 +9,18 @@
     <div class="d-flex justify-content-center">
         <div>
             <div class="m-3 text-light">
-                {{form_label(form.modele)}}
+                {{form_label(form.commentaire)}}
                 <br>
-                {{ form_widget(form.modele)}}
+                {{ form_widget(form.commentaire)}}
             </div>
             <div class="m-3 text-light">
-                {{form_label(form.immatriculation)}}
+                {{form_label(form.note)}}
                 <br>
-                {{form_widget(form.immatriculation)}}
+                {{form_widget(form.note)}}
             </div>
-        </div>
-        <div class="m-3 text-light">
-            <button type="submit" class="btn text-light">Enregistrer</button>
+            <div class="m-3 text-light">
+                <button type="submit" class="btn text-light">Enregistrer</button>
+            </div>
         </div>
     </div>
     {{ form_end(form) }}
