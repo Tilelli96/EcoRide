@@ -15,6 +15,18 @@ use App\Form\AvisType;
 #[Route('/avis')]
 final class AvisController extends AbstractController
 {
+    #[Route('/{id}/index', name: 'avis_index')]
+    public function index(EntityManagerInterface $em, User $user): Response
+    {
+        $repository = $em->getRepository(A::class);
+        $avis = $repository->findBy(
+            ['user_id' => 'user.getId()']
+        );
+        return $this->render('avis/index.html.twig', [
+            'avis' => $avis,
+        ]);
+    }
+
     #[Route('/{id}/create', name: 'app_avis')]
     public function create(Request $Request, EntityManagerInterface $em, User $user ): Response
     {

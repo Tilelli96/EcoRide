@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ARepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ARepository::class)]
@@ -13,8 +14,8 @@ class A
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $commentaire = null;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?\TextareaType $commentaire = null;
 
     #[ORM\Column]
     private ?int $note = null;
@@ -31,12 +32,12 @@ class A
         return $this->id;
     }
 
-    public function getCommentaire(): ?string
+    public function getCommentaire(): ?\TextareaType
     {
         return $this->commentaire;
     }
 
-    public function setCommentaire(string $commentaire): static
+    public function setCommentaire(\TextareaType $commentaire): static
     {
         $this->commentaire = $commentaire;
 
