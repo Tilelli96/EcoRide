@@ -11,9 +11,10 @@ use App\Entity\Covoiturage;
 use App\Form\CovoiturageType;
 use App\Entity\User;
 
+//#[Route('/covoiturage')]
 class CovoiturageController extends AbstractController
 {
-    #[Route('/covoiturage.create', name: 'create_covoiturage')]
+    #[Route('covoiturage/create', name: 'create_covoiturage')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $covoiturage = new Covoiturage();
@@ -23,7 +24,7 @@ class CovoiturageController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $covoiturage->setUserId($user);
             $covoiturage->setStatut('à venir');
-            $em->persist();
+            $em->persist($covoiturage);
             $em->flush($covoiturage);
             $this->redirectToRoute('page_accueil');
         }

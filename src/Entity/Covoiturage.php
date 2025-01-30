@@ -39,7 +39,7 @@ class Covoiturage
     private ?int $nb_place = null;
 
     #[ORM\Column]
-    private ?\MoneyType $prix_personne = null;
+    private ?float $prix_personne = null;
 
     #[ORM\ManyToOne]
     private ?Voiture $voiture_id = null;
@@ -148,12 +148,12 @@ class Covoiturage
         return $this;
     }
 
-    public function getPrixPersonne(): ?\MoneyType
+    public function getPrixPersonne(): ?float
     {
         return $this->prix_personne;
     }
 
-    public function setPrixPersonne(\MoneyType $prix_personne): static
+    public function setPrixPersonne(float $prix_personne): static
     {
         $this->prix_personne = $prix_personne;
 
