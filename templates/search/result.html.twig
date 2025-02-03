@@ -2,10 +2,11 @@
 
 {% block title %}Covoiturage{% endblock title %}
 
+
 {% block body %}
-    <h1 class="text-center text-light">covoiturages</h1>
+{% include "/search/search.html.twig" %}
     {%for covoiturage in covoiturages %}
-    <div class="card rounded-pill covoiturage mb-3 ms-5 me-5">
+    <div class="card rounded-pill covoiturage mt-3 mb-3 ms-5 me-5">
         <div class="row g-0">
           <div class="col-4 text-center">
             <img src="" class="rounded-circle text-light" alt="image de l'\utilisateur">

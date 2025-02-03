@@ -23,9 +23,13 @@ class CovoiturageRepository extends ServiceEntityRepository
     public function findBySearch(Search $search){
         return $this->createQueryBuilder('c')
                 ->where('c.lieu_arrivee = :arrivee')
-                ->andWhere('c.lieu_depart = :depart')
-                ->setParameter('depart', $search->getAdresseDepart())
+                ->andWhere('c.lieu_depart = :Ldepart')
+                ->andWhere('c.date_depart = :Ddepart')
+                ->andWhere('c.statut = :Statut')
+                ->setParameter('Ldepart', $search->getAdresseDepart())
+                ->setParameter('Ddepart', $search->getDate())
                 ->setParameter('arrivee', $search->getAdresseArrivee())
+                ->setParameter('Statut', 'à venir')
                 ->getQuery()
                 ->getResult();
     }

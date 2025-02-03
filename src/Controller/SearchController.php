@@ -27,18 +27,12 @@ class SearchController extends AbstractController
             $em->flush($search);
             $covoiturages = $covoiturageRepository->findBySearch($search);
             return $this->render('search/result.html.twig', [
-                'covoiturages' => $covoiturages
+                'covoiturages' => $covoiturages,
+                'form' => $form
             ]);
         }
         return $this->render('search/index.html.twig', [
             'form' => $form
-        ]);
-    }
-    #[Route('/home/{search}/result', name: 'app_result')]
-    public function result(CovoiturageRepository $covoiturageRepository, Search $search){
-        $covoiturages = $covoiturageRepository->findBySearch($search);
-        return $this->render('search/result.html.twig', [
-            'covoiturages' => $covoiturages
         ]);
     }
 }
