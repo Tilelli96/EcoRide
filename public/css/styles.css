@@ -1,8 +1,6 @@
-body html {
+body {
     background-color: #AEBA8A;
     margin: 0;
-    height: 100%;
-    width: 100%;
 }
 footer {
     background-image: url('../media/img_feuille.jpg');

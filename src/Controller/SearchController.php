@@ -13,8 +13,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class SearchController extends AbstractController
 {
+    
     #[Route('/home/search', name: 'app_search')]
-    public function index(Request $request, EntityManagerInterface $em): Response
+    public function search(Request $request, EntityManagerInterface $em): Response
     {
         $search = new Search();
         $form = $this->createForm(SearchType::class, $search);
