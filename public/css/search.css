@@ -1,0 +1,14 @@
+.search {
+    background-image: url('../media/img_route.jpg');
+    background-size:cover;
+    padding: 30px;
+}
+.adresse {
+    display: flex ;
+    justify-content: space-around;
+}
+@media (max-width: 990px) {
+    .adresse {
+        display : grid;
+    }
+}

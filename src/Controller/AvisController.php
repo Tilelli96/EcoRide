@@ -33,7 +33,7 @@ final class AvisController extends AbstractController
         $avis = new A();
         $form = $this->createForm(AvisType::class, $avis);
         $form->handleRequest($Request);
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmited() && $form->isValid()){
             $avis->setStatut('à confirmer');
             $avis->setUserId($user);
             $em->persist($avis);

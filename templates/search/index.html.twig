@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+    <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    {{ form_errors(form) }}
+    {{ form_start(form) }}
+
+    <div class="search">
+        <div class="adresse m-3 ">
+            <div class="m-2 col-6">
+                {{form_widget(form.adresse_depart, {'attr': {'placeholder': 'Départ', 'size': '40%'}})}}
+            </div>
+            <div class="m-2 col-6">
+                {{form_widget(form.adresse_arrivee, {'attr': {'placeholder': 'Arrivée', 'size': '40%'}})}}
+            </div>
+        </div>
+        <div class="adresse m-3">
+            <div class="d-flex m-2 col-6">
+                {{form_widget(form.Date, {'attr': {'class':'me-2'}})}}
+                {{form_widget(form.nb_personnes,  {'attr': {'placeholder': 'nb-personnes'}})}}
+            </div>
+            <div class="col-6">
+                <button type="submit" class="btn col-6 text-light m-3">Recherche</button>
+            </div>
+        </div>
+    </div>
+    
+    {{ form_end(form) }}
+{% endblock %}
