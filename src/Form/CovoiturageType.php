@@ -10,11 +10,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\VoitureRepository;
 
 class CovoiturageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $user = $options['user']; 
         $builder
             ->add('date_depart', null, [
                 'widget' => 'single_text',
@@ -31,7 +34,11 @@ class CovoiturageType extends AbstractType
             ->add('prix_personne')
             ->add('voiture_id', EntityType::class, [
                 'class' => Voiture::class,
+                //'query_builder' => function(VoitureRepository $repository) {
+                //    return $repository->findVoitureByUser($user);
+                //},
                 'choice_label' => 'modele',
+                'label' => 'Voiture'
             ])
             
         ;
@@ -41,6 +48,7 @@ class CovoiturageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Covoiturage::class,
+            'user' => null
         ]);
     }
 }

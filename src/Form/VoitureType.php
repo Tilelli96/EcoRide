@@ -25,9 +25,6 @@ class VoitureType extends AbstractType
                 'choice_label' => 'Libelle',
                 'label' => 'Marque',
             ])
-            ->add('user_id', EntityType::class, [
-                'class' => User::class,
-            ])
         ;
     }
 

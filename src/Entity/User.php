@@ -55,6 +55,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $pseudo = null;
 
+    
+
     #[ORM\Column]
     private bool $isVerified = false;
 

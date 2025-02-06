@@ -15,13 +15,13 @@ use Symfony\Component\Form\Form;
 
 class VoitureController extends AbstractController
 {
-    #[Route('/{id}_create_voiture', name: 'create_voiture')]
-    public function create(Request $request, EntityManagerInterface $em, int $id): Response
+    #[Route('/voiture/create', name: 'create_voiture')]
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
-        $user = $em->getRepository(User::class)->find($id);
+        $user = $this->getUser();
         if(!$user){
             $this->addFlash('error', 'veuillez vous connecter');
-            $this->redirectToRoute('app_register');
+            $this->redirectToRoute('app_login');
         }
         $voiture = new Voiture();
         $form = $this->createForm(VoitureType::class, $voiture);
@@ -29,9 +29,9 @@ class VoitureController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $voiture->setUserId($user);
             $em->persist($voiture);
-            $em->flush();
+            $em->flush($voiture);
             $this->addFlash('success', 'Enregistré');
-            return $this->redirectToRoute('page_accueil');
+            return $this->redirectToRoute('create_covoiturage');
         }
         return $this->render('voiture/create.html.twig', [
             'form' => $form
