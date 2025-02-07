@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Covoiturage;
 use App\Entity\Search;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -32,6 +33,16 @@ class CovoiturageRepository extends ServiceEntityRepository
                 ->setParameter('Statut', 'à venir')
                 ->getQuery()
                 ->getResult();
+    }
+
+    public function findByHistoricalUser(User $user){
+        return $this->createQueryBuilder('c')
+                    ->andWhere('c.statut = :statut')
+                    ->andWhere('c.user_id = :user')
+                    ->setParameter('statut', 'passé')
+                    ->setParameter('user', $user)
+                    ->getQuery()
+                    ->getResult();
     }
     //    /**
     //     * @return Covoiturage[] Returns an array of Covoiturage objects

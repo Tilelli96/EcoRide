@@ -11,11 +11,12 @@ use App\Entity\Covoiturage;
 use App\Form\CovoiturageType;
 use App\Entity\User;
 use App\Repository\VoitureRepository;
+use App\Repository\CovoiturageRepository;
 
-//#[Route('/covoiturage')]
+#[Route('/covoiturage')]
 class CovoiturageController extends AbstractController
 {
-    #[Route('covoiturage/create', name: 'create_covoiturage')]
+    #[Route('/create', name: 'create_covoiturage')]
     public function create(Request $request, EntityManagerInterface $em, VoitureRepository $vr): Response
     {
         $covoiturage = new Covoiturage();
@@ -32,6 +33,15 @@ class CovoiturageController extends AbstractController
         }
         return $this->render('covoiturage/index.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/historique', name: 'historique_covoiturage')]
+    public function show(CovoiturageRepository $covoiturage){
+        $user = $this->getUser();
+        $covoiturages = $covoiturage->findByHistoricalUser($user);
+        return $this->render('covoiturage/historique.html.twig', [
+            'covoiturages' => $covoiturages
         ]);
     }
 }
