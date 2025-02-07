@@ -16,15 +16,12 @@ use App\Repository\VoitureRepository;
 class CovoiturageController extends AbstractController
 {
     #[Route('covoiturage/create', name: 'create_covoiturage')]
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em, VoitureRepository $vr): Response
     {
         $covoiturage = new Covoiturage();
         $user = $this->getUser();
-        if(!$user){
-            $this->addFlash('error', 'veuillez vous connecter');
-            $this->redirectToRoute('app_login');
-        }
-        $form = $this->createForm(CovoiturageType::class, $covoiturage, ['user' => $user]);
+        $voitures = $vr->findVoitureByUser($user);
+        $form = $this->createForm(CovoiturageType::class, $covoiturage, array('voitures' => $voitures));
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $covoiturage->setUserId($user);

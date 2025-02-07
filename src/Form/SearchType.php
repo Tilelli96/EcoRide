@@ -6,6 +6,8 @@ use App\Entity\Search;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use  Symfony\Component\Validator\Constraints\Positive;
 
 class SearchType extends AbstractType
 {
@@ -15,7 +17,7 @@ class SearchType extends AbstractType
             ->add('adresse_depart')
             ->add('adresse_arrivee')
             ->add('Date', null, [
-                'widget' => 'single_text',
+                'widget' => 'single_text'
             ])
             ->add('nb_personnes')
         ;

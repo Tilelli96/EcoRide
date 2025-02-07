@@ -16,7 +16,7 @@ use App\Entity\Covoiturage;
 class SearchController extends AbstractController
 {
     
-    #[Route('/home/search', name: 'app_search')]
+    #[Route('/', name: 'app_search')]
     public function search(Request $request,CovoiturageRepository $covoiturageRepository, EntityManagerInterface $em): Response
     {
         $search = new Search();

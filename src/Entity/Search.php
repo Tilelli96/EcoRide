@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SearchRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SearchRepository::class)]
 class Search
@@ -24,6 +25,8 @@ class Search
     private ?\DateTimeInterface $Date = null;
 
     #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Positive]
     private ?int $nb_personnes = null;
 
     public function getId(): ?int
