@@ -10,7 +10,7 @@
         <div class="row g-0">
           <div class="col-4 text-center">
             <div class="rounded-circle">
-                {{covoiturage.getUserId.getPhoto()}}
+                <img src="(covoiturage.getUserId.getPhoto()" alt="image_utilisateur">
             </div>
             <p class="card-text text-light">{{covoiturage.getUserId().getPseudo()}}</p>
           </div>
@@ -24,7 +24,7 @@
                 <div class="d-flex justify-content-between">
                     <h2 class="card-text text-light">{{covoiturage.getPrixPersonne()}}€</h2>
                     <br>
-                    <a href="/user/details.html.twig"><img src="/media/arrow-down-right-circle-fill.svg" alt="Détails"></a>
+                    <a href="result/{{covoiturage.getId()}}/details"><img src="/media/arrow-down-right-circle-fill.svg" alt="Détails"></a>
                 </div>
             </div>
           </div>

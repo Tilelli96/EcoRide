@@ -37,6 +37,7 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/covoiturage/create, roles: ROLE_USER }
          - { path: ^/covoiturage/historique, roles: ROLE_USER }
+         - { path: ^/result//details, roles: ROLE_USER }
 
 when@test:
     security:

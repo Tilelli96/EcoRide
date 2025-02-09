@@ -10,6 +10,17 @@
 .covoiturage {
     background-color: #CA763B;
 }
+.fontVert {
+    color :#134B42 ;
+}
+.detail {
+    border-radius: 40px;
+}
+.participer {
+    background-color: #134B42;
+    border: none;
+    border-radius: 40px;
+}
 @media (max-width: 990px) {
     .adresse {
         display : grid;

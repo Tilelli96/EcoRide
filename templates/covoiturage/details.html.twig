@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Details{% endblock title %}
+
+{% block body %}
+    <div class="m-5 d-md-flex register detail">
+        <div class="m-3 text-center col-md-3">
+            <div class="m-3 text-center">
+                <img class="p-3 rounded-circle bg-success opacity-50" src="/media/person.svg" width="90" height="90" alt="image utilisateur">
+            </div>
+            <div class="text-light text-center m-3">
+                <div class="fontVert fs-2">
+                    {{covoiturage.getUserId().getPseudo()}}
+                </div>
+                <div class="">
+                    <a href="" class="text-small text-light">avis</a>
+                </div>
+                <div class="mt-2 text-light fs-1">
+                    {{covoiturage.getPrixPersonne()}}€
+                </div>   
+            </div>
+        </div>
+        <div class="m-3 col-md-6">
+            <div class="text-light">
+                <h2>{{covoiturage.getDateDepart()|date('l d F')}}</h2>
+            </div>
+            <div class="d-flex m-3 mt-5">
+                <div>
+                    <div class="text-light me-5">
+                        <h4>{{covoiturage.getLieuDepart()}}</h4>
+                    </div>
+                    <div class="text-light">
+                        <p>{{covoiturage.getHeureDepart()|date('H:i')}}</p>
+                    </div>
+                </div>
+                <img src="/media/arrow-right.svg" class="m-3 mt-0" alt="flèche">
+                <div>
+                    <div class="text-light ms-5">
+                        <h4>{{covoiturage.getLieuArrivee()}}</h4>
+                    </div>
+                    <div class="text-light ms-5">
+                        <p>{{covoiturage.getHeureArrivee()|date('H:i')}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="m-2 rounded-fill">
+                <button type="submit" class="col-6 participer p-2 text-light">Participer</button>
+            </div>
+        </div>
+        <div class="m-3 col-md-3 text-center">
+            <div class="m-3 text-center">
+                <img src="/media/car.svg" alt="voiture_icone" width="90" height="90">
+            </div>
+            <div class="m-3 text-center text-light">
+                {{covoiturage.getVoitureId().getMarqueId().getLibelle()}}
+            </div>
+            <div class="m-3 text-center text-light">
+                {{covoiturage.getVoitureId().getModele()}}
+            </div>
+            <div class="m-3 text-center text-light">
+                Energie {{covoiturage.getVoitureId().getEnergie()}}
+            </div>
+        </div>
+    </div>
+{% endblock %}
