@@ -15,9 +15,11 @@ class A
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Charset('UTF-8')]
     private ?\TextareaType $commentaire = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero]
     private ?int $note = null;
 
     #[ORM\Column(length: 50)]

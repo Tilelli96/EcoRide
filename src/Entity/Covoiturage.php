@@ -15,6 +15,7 @@ class Covoiturage
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\GreaterThanOrEqual('today')]
     private ?\DateTimeInterface $date_depart = null;
 
     #[ORM\Column(type: Types::TIME_IMMUTABLE)]
@@ -24,6 +25,7 @@ class Covoiturage
     private ?string $lieu_depart = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\GreaterThanOrEqual('today')]
     private ?\DateTimeInterface $date_arrivee = null;
 
     #[ORM\Column(type: Types::TIME_IMMUTABLE)]
@@ -33,9 +35,13 @@ class Covoiturage
     private ?string $lieu_arrivee = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $statut = null;
 
     #[ORM\Column]
+    #[Assert\GreaterThan(0)]
+    #[Assert\LessThan(5)]
     private ?int $nb_place = null;
 
     #[ORM\Column]

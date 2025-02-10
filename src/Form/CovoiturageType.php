@@ -19,6 +19,7 @@ class CovoiturageType extends AbstractType
         $builder
             ->add('date_depart', null, [
                 'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
                 
             ])
             ->add('heure_depart')

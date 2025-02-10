@@ -16,12 +16,17 @@ class Search
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $adresse_depart = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     private ?string $adresse_arrivee = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\GreaterThanOrEqual('today')]
     private ?\DateTimeInterface $Date = null;
 
     #[ORM\Column]
