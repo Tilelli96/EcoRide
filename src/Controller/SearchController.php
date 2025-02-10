@@ -23,13 +23,21 @@ class SearchController extends AbstractController
         $form = $this->createForm(SearchType::class, $search);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            $em->persist($search);
-            $em->flush($search);
             $covoiturages = $covoiturageRepository->findBySearch($search);
-            return $this->render('search/result.html.twig', [
-                'covoiturages' => $covoiturages,
-                'form' => $form
-            ]);
+            if((empty($covoiturages) === true)){
+                $alternatives = $covoiturageRepository->FindByOtherDate($search);
+                return $this->render('search/noresult.html.twig', [
+                    'alternatives' => $alternatives,
+                    'search' => $search,
+                    'form' => $form
+                ]);
+            } else {
+                return $this->render('search/result.html.twig', [
+                    'covoiturages' => $covoiturages,
+                    'form' => $form
+                 ]);
+            }
+            
         }
         return $this->render('search/index.html.twig', [
             'form' => $form

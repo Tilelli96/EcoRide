@@ -35,12 +35,25 @@ class CovoiturageRepository extends ServiceEntityRepository
                 ->getResult();
     }
 
+    public function findByOtherDate(Search $search){
+        return $this->createQueryBuilder('c')
+                ->where('c.lieu_arrivee = :arrivee')
+                ->andWhere('c.lieu_depart = :Ldepart')
+                ->andWhere('c.statut = :Statut')
+                ->setParameter('Ldepart', $search->getAdresseDepart())
+                ->setParameter('arrivee', $search->getAdresseArrivee())
+                ->setParameter('Statut', 'à venir')
+                ->getQuery()
+                ->getResult();
+    }
+
     public function findByHistoricalUser(User $user){
         return $this->createQueryBuilder('c')
                     ->andWhere('c.statut = :statut')
                     ->andWhere('c.user_id = :user')
                     ->setParameter('statut', 'passé')
                     ->setParameter('user', $user)
+                    ->orderBy('c.date_depart', 'ASC')
                     ->getQuery()
                     ->getResult();
     }
