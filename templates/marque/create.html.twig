@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}create marque!{% endblock %}
+
+{% block body %}
+<div class="alert text-center register m-5">
+    {{ form_errors(form) }}
+    {{ form_start(form) }}
+        {{form_widget(form.libelle, {'attr' : {'placeholder': 'Libelle'}})}}
+        <div class="m-3">
+           <button type="submit" class="btn">Enregistrer</button> 
+        </div>
+        
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
