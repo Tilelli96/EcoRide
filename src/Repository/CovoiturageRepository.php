@@ -49,9 +49,7 @@ class CovoiturageRepository extends ServiceEntityRepository
 
     public function findByHistoricalUser(User $user){
         return $this->createQueryBuilder('c')
-                    ->andWhere('c.statut = :statut')
                     ->andWhere('c.user_id = :user')
-                    ->setParameter('statut', 'passé')
                     ->setParameter('user', $user)
                     ->orderBy('c.date_depart', 'ASC')
                     ->getQuery()

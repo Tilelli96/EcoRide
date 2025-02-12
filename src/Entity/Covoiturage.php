@@ -36,8 +36,6 @@ class Covoiturage
     private ?string $lieu_arrivee = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank]
-    #[Assert\NotNull]
     private ?string $statut = null;
 
     #[ORM\Column]
@@ -53,6 +51,12 @@ class Covoiturage
 
     #[ORM\ManyToOne]
     private ?User $user_id = null;
+
+    /**
+     * @var list<User> les participant
+     */
+    #[ORM\Column]
+    private array $voyageurs = [];
 
     public function getId(): ?int
     {
@@ -187,6 +191,27 @@ class Covoiturage
     public function setUserId(?User $user_id): static
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     *
+     * @return list<User>
+     */
+    public function getVoyageurs(): array
+    {
+        $voyageurs = $this->voyageurs;
+        return array($voyageurs);
+    }
+
+    /**
+     * @param list<User> $voyageurs
+     */
+    public function setVoyageurs(User $voyageur): static
+    {
+        array_push($this->voyageurs, $voyageur);
 
         return $this;
     }
