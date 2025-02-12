@@ -15,9 +15,9 @@ class A
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 50)]
     #[Assert\Charset('UTF-8')]
-    private ?\TextareaType $commentaire = null;
+    private ?String $commentaire = null;
 
     #[ORM\Column]
     #[Assert\PositiveOrZero]
@@ -30,17 +30,21 @@ class A
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user_id = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $createdBy = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCommentaire(): ?\TextareaType
+    public function getCommentaire(): ?String
     {
         return $this->commentaire;
     }
 
-    public function setCommentaire(\TextareaType $commentaire): static
+    public function setCommentaire(String $commentaire): static
     {
         $this->commentaire = $commentaire;
 
@@ -79,6 +83,18 @@ class A
     public function setUserId(?User $user_id): static
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): static
+    {
+        $this->createdBy = $createdBy;
 
         return $this;
     }

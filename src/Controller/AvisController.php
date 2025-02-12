@@ -11,17 +11,15 @@ use App\Entity\Covoiturage;
 use App\Entity\User;
 use App\Entity\A;
 use App\Form\AvisType;
+use App\Repository\ARepository;
 
 #[Route('/avis')]
 final class AvisController extends AbstractController
 {
     #[Route('/{id}/index', name: 'avis_index')]
-    public function index(EntityManagerInterface $em, User $user): Response
+    public function index(EntityManagerInterface $em, ARepository $avisRepository, User $user): Response
     {
-        $repository = $em->getRepository(A::class);
-        $avis = $repository->findBy(
-            ['user_id' => 'user.getId()']
-        );
+        $avis = $avisRepository->findByUser($user);
         return $this->render('avis/index.html.twig', [
             'avis' => $avis,
         ]);
@@ -35,10 +33,11 @@ final class AvisController extends AbstractController
         $form->handleRequest($Request);
         if($form->isSubmitted() && $form->isValid()){
             $avis->setStatut('à confirmer');
+            $avis->setcreatedBy($this->getUser());
             $avis->setUserId($user);
             $em->persist($avis);
             $em->flush($avis);
-            $this->redirectToRoute('page_accueil');
+            $this->redirectToRoute('app_search');
         }
         
         return $this->render('avis/create.html.twig', [

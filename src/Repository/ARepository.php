@@ -16,20 +16,20 @@ class ARepository extends ServiceEntityRepository
         parent::__construct($registry, A::class);
     }
 
-    //    /**
-    //     * @return A[] Returns an array of A objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * @return A[] Returns an array of A objects
+     */
+    public function findByUser($user): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.user_id = :id')
+            ->andWhere('a.statut = :statut')
+            ->setParameter('id', $user)
+            ->setParameter('statut', 'validé')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     //    public function findOneBySomeField($value): ?A
     //    {
