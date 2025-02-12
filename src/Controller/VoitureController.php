@@ -21,7 +21,7 @@ class VoitureController extends AbstractController
         $user = $this->getUser();
         if(!$user){
             $this->addFlash('error', 'veuillez vous connecter');
-            $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_login');
         }
         $voiture = new Voiture();
         $form = $this->createForm(VoitureType::class, $voiture);

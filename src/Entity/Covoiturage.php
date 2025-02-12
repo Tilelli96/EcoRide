@@ -203,6 +203,7 @@ class Covoiturage
     public function getVoyageurs(): array
     {
         $voyageurs = $this->voyageurs;
+        $voyageurs[] = [$this->user_id];
         return array($voyageurs);
     }
 

@@ -27,9 +27,11 @@ class CovoiturageController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $covoiturage->setUserId($user);
             $covoiturage->setStatut('à venir');
+            $covoiturage->setVoyageurs($user);
             $em->persist($covoiturage);
             $em->flush($covoiturage);
-            $this->redirectToRoute('app_search');
+            $this->addFlash('success', 'Enregistré');
+            return $this->redirectToRoute("app_search");
         }
         return $this->render('covoiturage/index.html.twig', [
             'form' => $form,
