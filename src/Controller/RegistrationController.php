@@ -35,6 +35,7 @@ class RegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
             $user->setRoles(['user']);
+            $user->setCredit(20);
             $entityManager->persist($user);
             $entityManager->flush();
 

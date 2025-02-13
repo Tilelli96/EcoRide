@@ -67,6 +67,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private float $note;
 
+    #[ORM\Column]
+    private ?int $credit = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -246,6 +249,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setNote(float $note): static
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getCredit(): ?int
+    {
+        return $this->credit;
+    }
+
+    public function setCredit(int $credit): static
+    {
+        $this->credit = $credit;
 
         return $this;
     }
