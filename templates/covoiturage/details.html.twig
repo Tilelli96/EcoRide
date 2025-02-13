@@ -12,6 +12,10 @@
                 <div class="fontVert fs-2">
                     {{covoiturage.getUserId().getPseudo()}}
                 </div>
+                <div class="text-center">
+                    <img src="/media/star-fill.svg" alt="star avis">
+                    <p class="text-light">{{covoiturage.getUserId().getNote()}}</p>
+                  </div>
                 <div class="">
                     <a href="/avis/{{covoiturage.getUserId().getId()}}/index" class="text-small text-light">avis</a>
                 </div>

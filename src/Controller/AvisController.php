@@ -35,9 +35,14 @@ final class AvisController extends AbstractController
             $avis->setStatut('à confirmer');
             $avis->setcreatedBy($this->getUser());
             $avis->setUserId($user);
+            if(empty($user->getNote())){
+                $user->setNote($avis->getNote());
+            } else {
+                $user->setNote(($avis->getNote() + $user->getNote()) / 2);
+            }
             $em->persist($avis);
             $em->flush($avis);
-            $this->redirectToRoute('app_search');
+            return $this->redirectToRoute('app_search');
         }
         
         return $this->render('avis/create.html.twig', [

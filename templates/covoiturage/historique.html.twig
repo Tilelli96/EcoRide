@@ -9,12 +9,17 @@
         <div class="row g-0">
           <div class="col-4 text-center">
             <div class="rounded-circle">
-                {{covoiturage.getUserId.getPhoto()}}
+                {{covoiturage.getUserId().getPhoto()}}
+            </div>
+            <div class="text-center">
+              <img src="/media/star-fill.svg" alt="star avis">
+              <p class="text-light">{{covoiturage.getUserId().getNote()}}</p>
             </div>
             <p class="card-text text-light">{{covoiturage.getUserId().getPseudo()}}</p>
           </div>
           <div class="col-8">
             <div class="card-body">
+                <h5 class="m-3 text-light">{{covoiturage.getDateDepart()|date('l d F')}}</h5>
                 <div class="d-flex">
                     <h5 class="card-title text-light">{{covoiturage.getLieuDepart()}}</h5>
                     <img src="/media/arrow-right.svg" class="rounded-circle me-3 ms-4" alt="flèche">
@@ -22,8 +27,15 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <h2 class="card-text text-light">{{covoiturage.getPrixPersonne()}}€</h2>
-                    <br>
-                    <a href="/user/details.html.twig"><img src="/media/arrow-down-right-circle-fill.svg" alt="Détails"></a>
+                    {% if covoiturage.getStatut() == 'à venir' %}
+                    <div class="m-3 rounded-fill">
+                      <button type="" class="participer me-5 p-2 text-light">Démarrer</button>
+                    </div>
+                      {% else %}
+                      <div class="rounded-fill m-3">
+                        <p class="text-light p-2 me-5">Passé</p>
+                      </div>
+                    {% endif %}
                 </div>
             </div>
           </div>

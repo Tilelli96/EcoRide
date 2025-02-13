@@ -64,6 +64,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
+    #[ORM\Column]
+    private float $note;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -231,6 +234,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getNote(): float
+    {
+        return $this->note;
+    }
+
+    public function setNote(float $note): static
+    {
+        $this->note = $note;
 
         return $this;
     }
