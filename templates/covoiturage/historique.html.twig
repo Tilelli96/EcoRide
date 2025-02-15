@@ -28,22 +28,24 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <h2 class="card-text text-light">{{covoiturage.getPrixPersonne()}}€</h2>
-                    {% if covoiturage.getStatut() == "à venir" %}
-                      {% if covoiturage.getUserId() == app.user %}
-                      <div class="d-flex">
+                    <div class="d-flex">
+                      {% if covoiturage.getStatut() == "à venir" %}
                         <div class="m-2 rounded-fill">
-                          <a href="" alt="lien pour demarrer" class="btn participer p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir démarrer le covoiturage ?'));">Demarrer</a>
+                          <a href="/covoiturage/{{covoiturage.getId()/enCours}}" alt="lien pour demarrer" class="btn participer p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir démarrer le covoiturage ?'));">Demarrer</a>
                         </div>
                         <div class="m-2 rounded-fill">
                           <a href="/covoiturage/{{covoiturage.getId()}}/supprimer" alt="lien pour annuler" class="btn participer bg-danger p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir annuler votre voyage?'));">Annuler</a>
                         </div>
+                      {% elseif covoiturage.getStatut() == "en cours" %}
+                      <div class="m-2 rounded-fill">
+                        <a href="/covoiturage/{{covoiturage.getId()}}/passe" alt="lien pour clore le trajet" class="btn participer p-2 text-light">Arrivés à destination</a>
                       </div>
-                      {% endif %}
-                    {% else %}
+                    </div>
+                      {% else %}
                       <div class="rounded-fill m-3">
                         <p class="text-light p-2 me-5">Passé</p>
                       </div>
-                    {% endif %}
+                      {% endif %}
                 </div>
             </div>
           </div>
@@ -81,9 +83,12 @@
                           <a href="/covoiturage/{{passagerCovoiturage.getId()}}/supprimer" alt="lien pour participer" class="btn participer bg-danger p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir annuler votre voyage?'));">Annuler</a>
                         </div>
                       </div>
-                    {% else %}
+                    {% elseif passagerCovoiturage.getStatut() == 'passé' %}
                       <div class="rounded-fill m-3">
                         <p class="text-light p-2 me-5">Passé</p>
+                      </div>
+                      <div class="m-2 rounded-fill">
+                        <a href="/avis/{{passagerCovoiturage.getId()}}/create" alt="lien pour créer un avis" class="btn participer p-2 text-light">Soumettre un avis</a>
                       </div>
                     {% endif %}
                 </div>

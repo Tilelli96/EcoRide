@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="m-2 rounded-fill">
-                <a href="/covoiturage/{{covoiturage.getId()}}/participer" alt="lien pour participer" class="col-6 btn participer p-2 text-light">Participer</a>
+                <a href="/covoiturage/{{covoiturage.getId()}}/participer" alt="lien pour participer" class="col-6 btn participer p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir dépenser {{covoiturage.getPrixPersonne()}} ?'));">Participer</a>
             </div>
         </div>
         <div class="m-3 col-md-3 text-center">
@@ -65,5 +65,14 @@
                 Energie {{covoiturage.getVoitureId().getEnergie()}}
             </div>
         </div>
+    </div>
+    <div class="m-5 d-md-flex register detail">
+        <h4 class="text-light m-3">Participants</h4>
+        {% for covoit in covoiturage.getVoyageurs() %}
+            <div class="m-3">
+                <img class="p-3 rounded-circle bg-success opacity-50" src="/media/person.svg" width="90" height="90" alt="image utilisateur">
+                {{covoit.getPseudo()}}
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

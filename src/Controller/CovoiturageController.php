@@ -103,4 +103,24 @@ class CovoiturageController extends AbstractController
             return $this->redirectToRoute('app_search');
         };
     }
+
+    #[Route('/{id}/enCours',)]
+    public function progress(Covoiturage $covoiturage){
+        $covoiturage->setStatut('en cours');
+        $this->addFlash('success', 'votre covoiturage est en cours');
+        return $this->redirectToRoute('app_search');
+    }
+
+    #[Route('/{id}/passe')]
+    public function passed(Covoiturage $covoiturage){
+        $covoiturage->setStatut('passé');
+        foreach($covoiturage->getVoyageurs() as $user){
+            $email = (new Email())
+                        ->from('haidou.tounsia@gmail.com')
+                        ->to($user->getEmail())
+                        ->subject('Voyage annulé')
+                        ->text('Merci de bien vouloir vous rendre à votre espace EcoRide afin de valider votre covoiturage');
+            $mailer->send($email);
+        }
+    }
 }
