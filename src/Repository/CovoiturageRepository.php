@@ -55,6 +55,18 @@ class CovoiturageRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getResult();
     }
+
+    public function findByPassager(User $user)
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.voyageurs', 'v') 
+            ->where('v.id = :userId') 
+            ->setParameter('userId', $user->getId())
+            ->orderBy('c.date_depart', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Covoiturage[] Returns an array of Covoiturage objects
     //     */

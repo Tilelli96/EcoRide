@@ -6,6 +6,9 @@ use App\Repository\CovoiturageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\User;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: CovoiturageRepository::class)]
 class Covoiturage
@@ -52,11 +55,22 @@ class Covoiturage
     #[ORM\ManyToOne]
     private ?User $user_id = null;
 
-    /**
-     * @var list<User> les participant
-     */
-    #[ORM\Column]
-    private array $voyageurs = [];
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[ORM\JoinTable(
+        name: "covoiturage_voyageurs",
+        joinColumns: [
+            new ORM\JoinColumn(name: "covoiturage_id", referencedColumnName: "id")
+        ],
+        inverseJoinColumns: [
+            new ORM\JoinColumn(name: "user_id", referencedColumnName: "id")
+        ]
+    )]
+    private collection $voyageurs;
+
+    public function __construct()
+    {
+        $this->voyageurs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -195,25 +209,22 @@ class Covoiturage
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     *
-     * @return list<User>
-     */
-    public function getVoyageurs(): array
+    public function getVoyageurs(): Collection
     {
-        $voyageurs = $this->voyageurs;
-        $voyageurs[] = [$this->user_id];
-        return array($voyageurs);
+        return $this->voyageurs;
     }
 
-    /**
-     * @param list<User> $voyageurs
-     */
     public function setVoyageurs(User $voyageur): static
     {
-        array_push($this->voyageurs, $voyageur);
+        if (!$this->voyageurs->contains($voyageur)) {
+            $this->voyageurs[] = $voyageur;
+        }
+        return $this;
+    }
 
+    public function removeVoyageur(User $voyageur): static
+    {
+        $this->voyageurs->removeElement($voyageur);
         return $this;
     }
 }

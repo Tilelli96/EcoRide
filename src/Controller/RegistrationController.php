@@ -36,6 +36,7 @@ class RegistrationController extends AbstractController
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
             $user->setRoles(['user']);
             $user->setCredit(20);
+            $user->setNote(0);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -49,7 +50,7 @@ class RegistrationController extends AbstractController
             );
 
 
-            return $this->redirectToRoute('app_search');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('user/register.html.twig', [

@@ -9,6 +9,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -65,10 +68,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     #[ORM\Column]
-    private float $note;
+    private ?float $note = null;
 
     #[ORM\Column]
     private ?int $credit = null;
+
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Covoiturage::class)]
+    private Collection $covoiturages;
+
 
     public function getId(): ?int
     {
@@ -246,7 +253,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->note;
     }
 
-    public function setNote(float $note): static
+    public function setNote(?float $note): static
     {
         $this->note = $note;
 
@@ -262,6 +269,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->credit = $credit;
 
+        return $this;
+    }
+
+    public function getCovoiturages(): Collection
+    {
+        return $this->covoiturages;
+    }
+
+    public function setCovoiturage(Covoiturage $covoiturage): self
+    {
+        if (!$this->covoiturages->contains($covoiturage)) {
+            $this->covoiturages[] = $covoiturage;
+            $covoiturage->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCovoiturage(Covoiturage $covoiturage): self
+    {
+        if ($this->covoiturages->removeElement($covoiturage)) {
+            if ($covoiturage->getUserId() === $this) {
+                $covoiturage->setUserId(null);
+            }
+        }
         return $this;
     }
 }

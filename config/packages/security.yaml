@@ -37,6 +37,7 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/covoiturage/create, roles: ROLE_USER }
          - { path: ^/covoiturage/historique, roles: ROLE_USER }
+         - { path: ^/covoiturage, roles: ROLE_USER }
          - { path: ^/result, roles: ROLE_USER }
          - { path: ^/avis, roles: ROLE_USER }
          - { path: ^/voiture, roles: ROLE_USER }
