@@ -55,7 +55,7 @@ class Covoiturage
     #[ORM\ManyToOne]
     private ?User $user_id = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class)]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'covoiturages')]
     #[ORM\JoinTable(
         name: "covoiturage_voyageurs",
         joinColumns: [

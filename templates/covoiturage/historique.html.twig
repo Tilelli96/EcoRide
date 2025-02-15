@@ -30,9 +30,14 @@
                     <h2 class="card-text text-light">{{covoiturage.getPrixPersonne()}}€</h2>
                     {% if covoiturage.getStatut() == "à venir" %}
                       {% if covoiturage.getUserId() == app.user %}
-                        <div class="m-3 rounded-fill">
-                          <button type="" class="participer me-5 p-2 text-light">Démarrer</button>
+                      <div class="d-flex">
+                        <div class="m-2 rounded-fill">
+                          <a href="" alt="lien pour demarrer" class="btn participer p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir démarrer le covoiturage ?'));">Demarrer</a>
                         </div>
+                        <div class="m-2 rounded-fill">
+                          <a href="/covoiturage/{{covoiturage.getId()}}/supprimer" alt="lien pour annuler" class="btn participer bg-danger p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir annuler votre voyage?'));">Annuler</a>
+                        </div>
+                      </div>
                       {% endif %}
                     {% else %}
                       <div class="rounded-fill m-3">
@@ -70,8 +75,11 @@
                 <div class="d-flex justify-content-between">
                     <h2 class="card-text text-light">{{passagerCovoiturage.getPrixPersonne()}}€</h2>
                     {% if passagerCovoiturage.getStatut() == 'à venir' %}
-                      <div class="rounded-fill m-3">
+                      <div class="rounded-fill m-3 d-flex">
                         <p class="text-light p-2 me-5">à venir</p>
+                        <div class="m-2 rounded-fill">
+                          <a href="/covoiturage/{{passagerCovoiturage.getId()}}/supprimer" alt="lien pour participer" class="btn participer bg-danger p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir annuler votre voyage?'));">Annuler</a>
+                        </div>
                       </div>
                     {% else %}
                       <div class="rounded-fill m-3">
