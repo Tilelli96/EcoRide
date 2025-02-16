@@ -41,6 +41,7 @@ security:
          - { path: ^/result, roles: ROLE_USER }
          - { path: ^/avis, roles: ROLE_USER }
          - { path: ^/voiture, roles: ROLE_USER }
+         - { path: ^/employe, roles: ROLE_EMPLOYE }
 
 when@test:
     security:

@@ -31,6 +31,16 @@ class ARepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByStatut(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.statut = :statut')
+            ->setParameter('statut', 'à confirmer')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    public function findOneBySomeField($value): ?A
     //    {
     //        return $this->createQueryBuilder('a')
