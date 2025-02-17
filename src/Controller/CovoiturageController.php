@@ -12,8 +12,11 @@ use App\Form\CovoiturageType;
 use App\Entity\User;
 use App\Repository\VoitureRepository;
 use App\Repository\CovoiturageRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
+use App\Repository\LitigeRepository;
+use App\Entity\Litige;
 
 #[Route('/covoiturage')]
 class CovoiturageController extends AbstractController
@@ -122,13 +125,29 @@ class CovoiturageController extends AbstractController
         return $this->redirectToRoute('app_search');
     }
 
-    #[Route('/{id}/valider')]
-    public function validate(Covoiturage $covoiturage, EntitymanagerInterface $em): Response
+    #[Route('/{id_C}/{id_U}/valider')]
+    public function validate(int $id_C, int $id_U, CovoiturageRepository $co, UserRepository $us, EntitymanagerInterface $em): Response
     {
-        $this->getUser()->setCredit($this->getUser()->getCredit() - $covoiturage->getPrixPersonne());
+        $covoiturage = $co->findOneById($id_C);
+        $user = $us->findOneById($id_U);
+        $user->setCredit($user->getCredit() - $covoiturage->getPrixPersonne());
         $covoiturage->getUserId()->setCredit($covoiturage->getUserId()->getCredit() + ($covoiturage->getPrixPersonne() - 2));
         $em->flush();
         $this->addFlash('success', 'Votre validation a bien été enregistrée');
         return $this->redirectToRoute('app_search');
     }
+
+    #[Route('/{id_C}/{id_U}/ajouter')]
+    public function add(int $id_C, int $id_U, CovoiturageRepository $co, UserRepository $us, EntityManagerInterface $em): Response
+    {
+        $covoiturage = $co->findOneById($id_C);
+        $user = $us->findOneById($id_U);
+        $litige = new Litige();
+        $litige->addCovoiturage($covoiturage);
+        $litige->addUser($user);
+        $em->persist($litige);
+        $em->flush($litige);
+        $this->addFlash('success', 'le litige a bien été enregistrer');
+        return $this->redirectToRoute('app_search');
+    } 
 }

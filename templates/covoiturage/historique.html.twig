@@ -91,7 +91,10 @@
                         <p class="text-light p-2 me-5">Passé</p>
                       </div>
                       <div class="m-2 rounded-fill">
-                        <a href="/covoiturage/{{passagerCovoiturage.getId()}}/valider" alt="lien pour créer un avis" class="btn participer p-2 text-light">Valider</a>
+                        <a href="/covoiturage/{{passagerCovoiturage.getId()}}/{{app.user.getId()}}/valider" alt="lien pour valider" class="btn participer p-2 text-light">Valider</a>
+                      </div>
+                      <div class="m-2 rounded-fill">
+                        <a href="/covoiturage/{{passagerCovoiturage.getId()}}/{{app.user.getId()}}/ajouter" alt="lien pour signaler un problème" class="btn participer p-2 text-light">Signaler un problème</a>
                       </div>
                       <div class="m-2 rounded-fill">
                         <a href="/avis/{{passagerCovoiturage.getUserId().getId()}}/create" alt="lien pour créer un avis" class="btn participer p-2 text-light">Soumettre un avis</a>
