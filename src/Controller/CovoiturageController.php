@@ -55,8 +55,6 @@ class CovoiturageController extends AbstractController
     public function participate(Covoiturage $covoiturage, EntityManagerInterface $em){
         if(($covoiturage->getNbPlace() - count($covoiturage->getVoyageurs())) >= 0){
             if($this->getUser()->getCredit() >= $covoiturage->getPrixPersonne()){
-                $this->getUser()->setCredit($this->getUser()->getCredit() - $covoiturage->getPrixPersonne());
-                $covoiturage->getUserId()->setCredit($covoiturage->getUserId()->getCredit() + ($covoiturage->getPrixPersonne() - 2));
                 $covoiturage->setVoyageurs($this->getUser());
                 $em->persist($covoiturage);
                 $em->flush();
@@ -87,8 +85,6 @@ class CovoiturageController extends AbstractController
                             ->subject('Voyage annulé')
                             ->text('votre covoiturage a été annulé');
                 $mailer->send($email);
-                $user->setCredit($user->getCredit() + $covoiturage->getPrixPersonne());
-                $covoiturage->getUserId()->setCredit($covoiturage->getUserId()->getCredit() - $covoiturage->getPrixPersonne());
             }
             $em->remove($covoiturage);
             $em->flush();
@@ -96,8 +92,6 @@ class CovoiturageController extends AbstractController
             return $this->redirectToRoute('app_search');
         }else{
             $covoiturage->removeVoyageur($this->getUser());
-            $this->getUser()->setCredit($this->getUser()->getCredit() + ($covoiturage->getPrixPersonne() - 1));
-            $covoiturage->getUserId()->setCredit($covoiturage->getUserId()->getCredit() - $covoiturage->getPrixPersonne());
             $em->flush();
             $this->addFlash('success', 'votre participation a bien été annulée');
             return $this->redirectToRoute('app_search');
@@ -105,15 +99,17 @@ class CovoiturageController extends AbstractController
     }
 
     #[Route('/{id}/enCours',)]
-    public function progress(Covoiturage $covoiturage){
+    public function progress(Covoiturage $covoiturage, EntityManagerInterface $em){
         $covoiturage->setStatut('en cours');
+        $em->flush();
         $this->addFlash('success', 'votre covoiturage est en cours');
         return $this->redirectToRoute('app_search');
     }
 
     #[Route('/{id}/passe')]
-    public function passed(Covoiturage $covoiturage){
+    public function passed(Covoiturage $covoiturage, EntityManagerInterface $em, MailerInterface $mailer){
         $covoiturage->setStatut('passé');
+        $em->flush();
         foreach($covoiturage->getVoyageurs() as $user){
             $email = (new Email())
                         ->from('haidou.tounsia@gmail.com')
@@ -122,5 +118,17 @@ class CovoiturageController extends AbstractController
                         ->text('Merci de bien vouloir vous rendre à votre espace EcoRide afin de valider votre covoiturage');
             $mailer->send($email);
         }
+        $this->addFlash('success', 'Vous etes arrivés à destination');
+        return $this->redirectToRoute('app_search');
+    }
+
+    #[Route('/{id}/valider')]
+    public function validate(Covoiturage $covoiturage, EntitymanagerInterface $em): Response
+    {
+        $this->getUser()->setCredit($this->getUser()->getCredit() - $covoiturage->getPrixPersonne());
+        $covoiturage->getUserId()->setCredit($covoiturage->getUserId()->getCredit() + ($covoiturage->getPrixPersonne() - 2));
+        $em->flush();
+        $this->addFlash('success', 'Votre validation a bien été enregistrée');
+        return $this->redirectToRoute('app_search');
     }
 }

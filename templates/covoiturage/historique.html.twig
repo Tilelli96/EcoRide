@@ -4,6 +4,7 @@
 
 {% block body %}
     <h1 class="text-center text-light">Historique</h1>
+    <div class="register">
     <h1 class="text-center text-light">Conducteur</h1>
     {% for covoiturage in covoiturages %}
     <div class="card rounded-pill covoiturage mt-3 mb-3 ms-5 me-5">
@@ -31,27 +32,29 @@
                     <div class="d-flex">
                       {% if covoiturage.getStatut() == "à venir" %}
                         <div class="m-2 rounded-fill">
-                          <a href="/covoiturage/{{covoiturage.getId()/enCours}}" alt="lien pour demarrer" class="btn participer p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir démarrer le covoiturage ?'));">Demarrer</a>
+                          <a href="/covoiturage/{{covoiturage.getId()}}/enCours" alt="lien pour demarrer" class="btn participer p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir démarrer le covoiturage ?'));">Demarrer</a>
                         </div>
                         <div class="m-2 rounded-fill">
                           <a href="/covoiturage/{{covoiturage.getId()}}/supprimer" alt="lien pour annuler" class="btn participer bg-danger p-2 text-light" onclick="return(confirm('Etes-vous sûr de vouloir annuler votre voyage?'));">Annuler</a>
                         </div>
                       {% elseif covoiturage.getStatut() == "en cours" %}
-                      <div class="m-2 rounded-fill">
-                        <a href="/covoiturage/{{covoiturage.getId()}}/passe" alt="lien pour clore le trajet" class="btn participer p-2 text-light">Arrivés à destination</a>
-                      </div>
-                    </div>
+                        <div class="m-2 rounded-fill">
+                          <a href="/covoiturage/{{covoiturage.getId()}}/passe" alt="lien pour clore le trajet" class="btn participer p-2 text-light">Arrivés à destination</a>
+                        </div>
                       {% else %}
                       <div class="rounded-fill m-3">
                         <p class="text-light p-2 me-5">Passé</p>
                       </div>
                       {% endif %}
+                    </div>
                 </div>
             </div>
           </div>
         </div>
-      </div>
+    </div>
     {% endfor %}
+    </div>
+    <div class="register">
     <h1 class="text-center text-light">Passagers</h1>
     {% for passagerCovoiturage in passagerCovoiturages %}
     <div class="card rounded-pill covoiturage mt-3 mb-3 ms-5 me-5">
@@ -88,10 +91,10 @@
                         <p class="text-light p-2 me-5">Passé</p>
                       </div>
                       <div class="m-2 rounded-fill">
-                        <a href="" alt="lien pour créer un avis" class="btn participer p-2 text-light">Valider</a>
+                        <a href="/covoiturage/{{passagerCovoiturage.getId()}}/valider" alt="lien pour créer un avis" class="btn participer p-2 text-light">Valider</a>
                       </div>
                       <div class="m-2 rounded-fill">
-                        <a href="/avis/{{passagerCovoiturage.getId()}}/create" alt="lien pour créer un avis" class="btn participer p-2 text-light">Soumettre un avis</a>
+                        <a href="/avis/{{passagerCovoiturage.getUserId().getId()}}/create" alt="lien pour créer un avis" class="btn participer p-2 text-light">Soumettre un avis</a>
                       </div>
                     {% endif %}
                 </div>
@@ -100,5 +103,5 @@
         </div>
       </div>
     {% endfor %}
-
+</div>
 {% endblock %}

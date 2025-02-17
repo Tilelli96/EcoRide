@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage{% endblock title %}
-
+{% block title %}Covoiturage{% endblock %}
 
 {% block body %}
-{% include "/search/search.html.twig" %}
+    {% include "/search/search.html.twig" %}
     <h5 class="text-center text-light m-5">Désolé il n'y a pas de départ pour {{search.getAdresseArrivee()}} à cette date.<br>Voici les premiers covoiturages les plus proches pour votre voyage </h5>
+    <p class="text-light text-center">{{ alternatives|length }} alternatives trouvés.</p>
     {% for alternative in alternatives %}
     <div class="card rounded-pill covoiturage mt-3 mb-3 ms-5 me-5">
         <div class="row g-0">
@@ -15,9 +15,9 @@
             </div>
             <div class="text-center">
               <img src="/media/star-fill.svg" alt="star avis">
-              <p class="text-light">{{covoiturage.getUserId().getNote()}}</p>
+              <p class="text-light">{{alternative.getUser().getNote()}}</p>
             </div>
-            <p class="card-text text-light">{{alternative.getUserId().getPseudo()}}</p>
+            <p class="card-text text-light">{{alternative.getUser().getPseudo()}}</p>
           </div>
           <div class="col-8">
             <div class="card-body">

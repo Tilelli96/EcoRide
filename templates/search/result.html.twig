@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Covoiturage{% endblock title %}
+{% block title %}Covoiturage{% endblock %}
 
 
 {% block body %}
@@ -10,7 +10,7 @@
         <div class="row g-0">
           <div class="col-4 text-center">
             <div class="rounded-circle">
-              <img src="(covoiturage.getUserId.getPhoto()" alt="image_utilisateur">
+              <img src="{{covoiturage.getUserId.getPhoto()}}" alt="image_utilisateur">
             </div>
             <div class="text-center">
               <img src="/media/star-fill.svg" alt="star avis">
@@ -27,7 +27,7 @@
                     <h5 class="card-title text-light">{{covoiturage.getLieuArrivee()}}</h5>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <h2 class="card-text text-light">{{covoiturage.getPrixPersonne()}}€</h2>
+                    <h2 class="card-text text-light">{{covoiturage.getPrixPersonne()}}Crédit</h2>
                     <br>
                     <a href="/result/{{covoiturage.getId()}}/details"><img src="/media/arrow-down-right-circle-fill.svg" alt="Détails"></a>
                 </div>
