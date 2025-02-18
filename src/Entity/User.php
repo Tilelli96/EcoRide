@@ -51,10 +51,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $telephone = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $adresse = null;
+    private string $adresse;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date_naissance = null;
+    private \DateTimeInterface $date_naissance;
 
     #[ORM\Column(type: Types::BLOB, nullable: true)]
     private $photo = null;
@@ -68,12 +68,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private bool $isVerified = false;
 
     #[ORM\Column]
-    private ?float $note = null;
+    private float $note;
 
     #[ORM\Column]
     private ?int $credit = null;
 
-    #[ORM\ManyToMany(mappedBy: 'user_id', targetEntity: Covoiturage::class)]
+    #[ORM\ManyToMany(mappedBy: 'User_id', targetEntity: Covoiturage::class)]
     private Collection $covoiturages;
 
 
@@ -176,7 +176,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
@@ -188,7 +188,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getAdresse(): string
     {
         return $this->adresse;
     }
@@ -200,7 +200,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+    public function getDateNaissance(): \DateTimeInterface
     {
         return $this->date_naissance;
     }
@@ -253,14 +253,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->note;
     }
 
-    public function setNote(?float $note): static
+    public function setNote(float $note): static
     {
         $this->note = $note;
 
         return $this;
     }
 
-    public function getCredit(): ?int
+    public function getCredit(): int
     {
         return $this->credit;
     }

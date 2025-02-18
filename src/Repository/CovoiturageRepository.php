@@ -67,6 +67,27 @@ class CovoiturageRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function countCovoituragesPerDay(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->select("YEAR(c.date_depart) as annee, MONTH(c.date_depart) as mois, DAY(c.date_depart) as jour, COUNT(c.id) as nombre_covoiturages")
+            ->groupBy('annee, mois, jour')
+            ->orderBy('annee, mois, jour', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getGainsParJour()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.date_depart AS jour, COUNT(voyageurs.id) * 2 AS credits_gagnes')
+            ->leftJoin('c.voyageurs', 'voyageurs')
+            ->groupBy('jour')
+            ->orderBy('jour', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Covoiturage[] Returns an array of Covoiturage objects
     //     */

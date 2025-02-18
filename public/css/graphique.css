@@ -1,0 +1,33 @@
+.chart-container {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: flex-end; /* Aligne les barres en bas */
+    gap: 10px; /* Espacement entre les barres */
+    height: 250px; /* Hauteur du graphique */
+    width: 90%; /* Ajuste la largeur */
+    margin: auto; /* Centre le conteneur */
+    border-bottom: 2px solid #ffffff; /* Ligne pour représenter l'axe X */
+    padding: 20px 0;
+}
+
+.bar {
+    width: 40px;
+    background-color: #134B42;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.bar:hover {
+    background-color: #134B42;
+}
+
+.label {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+}

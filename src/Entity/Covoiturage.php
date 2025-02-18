@@ -53,7 +53,7 @@ class Covoiturage
     private ?Voiture $voiture_id = null;
 
     #[ORM\ManyToOne]
-    private ?User $user_id = null;
+    private ?User $user = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'covoiturages')]
     #[ORM\JoinTable(
@@ -62,7 +62,7 @@ class Covoiturage
             new ORM\JoinColumn(name: "covoiturage_id", referencedColumnName: "id")
         ],
         inverseJoinColumns: [
-            new ORM\JoinColumn(name: "user_id", referencedColumnName: "id")
+            new ORM\JoinColumn(name: "User_id", referencedColumnName: "id")
         ]
     )]
     private collection $voyageurs;
@@ -199,12 +199,12 @@ class Covoiturage
 
     public function getUserId(): ?User
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     public function setUserId(?User $user_id): static
     {
-        $this->user_id = $user_id;
+        $this->user_id = $user;
 
         return $this;
     }

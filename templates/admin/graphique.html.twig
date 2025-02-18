@@ -1,0 +1,41 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Statistiques des Covoiturages{% endblock %}
+
+{% block body %}
+    <h2 class="text-center text-light">Nombre de covoiturages par jour</h2>
+
+    {% set max_value = max(covoiturages|map(v => v.nombre_covoiturages)) %}
+
+    <div class="chart-container">
+        {% for covoiturage in covoiturages %}
+        {% set bar_height = ((covoiturage.nombre_covoiturages / max_value) * 200) %}
+            <div>
+                <div class="bar text-light" style="height: '{{ bar_height }}px';">
+                    {{ covoiturage.nombre_covoiturages }}
+                </div>
+                <div class="label text-light">{{ covoiturage.jour }}/{{ covoiturage.mois }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <h2 class="text-center text-light">Gains de la plateforme par jour</h2>
+
+    {% set max_value = max(gains|map(v => v.credits_gagnes)) %}
+    {% if max_value == 0 %}
+        {% set max_value = 1 %}
+    {% endif %}
+
+    <div class="chart-container">
+        {% for gain in gains %}
+            {% set bar_height = ((gain.credits_gagnes / max_value) * 200)|round %}
+            <div>
+                <div class="bar" style="height: '{{ bar_height|default(10) }}px';">
+                    {{ gain.credits_gagnes }}
+                </div>
+                <div class="label">{{ gain.jour|date('d/m') }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <h2 class="text-center text-light">Gains de la plateforme par jour</h2>
+
+{% endblock %}
