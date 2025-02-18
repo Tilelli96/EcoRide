@@ -36,6 +36,12 @@
                       <li class="nav-item">
                         <a class="nav-link text-light" href="/employe/litiges/index">Problèmes</a>
                       </li>
+                      <li class="nav-item">
+                        <form method="get" action="{{ path('admin_utilisateurs') }}" class="">
+                          <input type="text" name="q" placeholder="Rechercher un utilisateur..." value="{{ app.request.query.get('q') }}">
+                          <button type="submit" class="btn">Rechercher</button>
+                        </form>
+                      </li>
                     </ul>
                   </div>
                 </div>

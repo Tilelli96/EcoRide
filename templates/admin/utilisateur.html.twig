@@ -1,0 +1,26 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Utilisateur{% endblock %}
+
+
+{% block body %}
+<div class="register m-5 p-3 d-flex justify-content-between">
+    <div>
+        <h3 class="text-light">{{user.getEmail()}}</h3>
+        <ul>
+            <li class="text-light">
+                nom : {{user.getNom()}}
+            </li>
+            <li class="text-light">
+                Prenom : {{user.getPrenom()}}
+            </li>
+            <li class="text-light">
+                Telephone : {{user.getTelephone()}}
+            </li>
+        </ul>
+    </div>
+    <div class="ml-auto align-self-center">
+        <a href="/admin/{{user.getId()}}/suspendre" class="text-light participer p-3 rounded-fill text-right">Suspendre</a>
+    </div>
+    </div>
+{% endblock %}

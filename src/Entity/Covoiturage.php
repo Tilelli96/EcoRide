@@ -62,7 +62,7 @@ class Covoiturage
             new ORM\JoinColumn(name: "covoiturage_id", referencedColumnName: "id")
         ],
         inverseJoinColumns: [
-            new ORM\JoinColumn(name: "User_id", referencedColumnName: "id")
+            new ORM\JoinColumn(name: "user_id", referencedColumnName: "id")
         ]
     )]
     private collection $voyageurs;
@@ -202,9 +202,9 @@ class Covoiturage
         return $this->user;
     }
 
-    public function setUserId(?User $user_id): static
+    public function setUserId(?User $user): static
     {
-        $this->user_id = $user;
+        $this->user = $user;
 
         return $this;
     }

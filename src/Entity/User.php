@@ -73,7 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $credit = null;
 
-    #[ORM\ManyToMany(mappedBy: 'User_id', targetEntity: Covoiturage::class)]
+    #[ORM\ManyToMany(mappedBy: 'voyageurs', targetEntity: Covoiturage::class, cascade: ["remove"])]
     private Collection $covoiturages;
 
 

@@ -31,7 +31,7 @@ class A
     private ?User $user_id = null;
 
     #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(name: "created_by_id", referencedColumnName: "id", onDelete: "SET NULL")]
     private ?User $createdBy = null;
 
     public function getId(): ?int

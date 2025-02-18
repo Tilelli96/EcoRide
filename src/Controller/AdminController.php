@@ -10,6 +10,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use App\Repository\CovoiturageRepository;
 use App\Entity\Covoiturage;
 
@@ -53,4 +54,29 @@ class AdminController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/utilisateurs', name: 'admin_utilisateurs')]
+    public function search(Request $request, UserRepository $userRepository): Response
+    {
+        $keyword = $request->query->get('q', ''); // Récupère la valeur saisie
+        $user = $userRepository->findBySearch($keyword);
+
+        return $this->render('admin/utilisateur.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/{id}/suspendre')]
+    public function suspend(User $user, EntityManagerInterface $em) : Response
+    {
+        foreach ($user->getCovoiturages() as $covoiturage) {
+            $covoiturage->removeVoyageur($user);
+            $em->persist($covoiturage);
+        }
+        $em->remove($user);
+        $em->flush();
+        $this->addFlash('success', 'l\'utilisateur a bien été supprimé' );
+        return $this->redirectToRoute('app_admin');
+    }
+
 }
