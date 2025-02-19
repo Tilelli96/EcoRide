@@ -6,7 +6,7 @@
 • Git (pour le versionnement du code)
 2. Installation du Projet
 1. Cloner le dépôt
-git clone https://github.com/votre-repo.git
+[git clone (https://github.com/Tilelli96/EcoRide.git)
 cd votre-projet
 2. Installer les dépendances
 composer install
